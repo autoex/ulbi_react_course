@@ -3,17 +3,17 @@ import '../styles/Form.css'
 import Button from "../UI/button/Button";
 import Input from "../UI/input/Input";
 
-const Form = () => {
+const Form = ({title, body, setTitle, setBody, addPost}) => {
     return (
-        <form className='form'>
+        <form className='form' onSubmit={addPost}>
             <div>
-                <Input  type="text" placeholder={'Title'}/>
+                <Input  type="text" placeholder={'Title'} value={title} onChange={e=>setTitle(e.target.value)}/>
             </div>
             <div>
-                <Input type="text" placeholder={'Body'}/>
+                <Input type="text" placeholder={'Body'} value={body} onChange={e=>setBody(e.target.value)}/>
             </div>
             <div>
-                <Button disabled>Add</Button>
+                <Button >Add</Button>
             </div>
         </form>
     );
