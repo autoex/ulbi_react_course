@@ -1,0 +1,11 @@
+.form {
+    padding-bottom: 10px;
+}
+.form div {
+    padding-bottom: 15px;
+}
+.form input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 3px;
+}
