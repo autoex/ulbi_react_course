@@ -1,10 +1,10 @@
-import React from 'react';
+import React, {forwardRef} from 'react';
 import Button from "../UI/button/Button";
 
-const PostItem = ({post, idx}) => {
+const PostItem = forwardRef(({post, idx}, ref) => {
 
     return (
-        <div className='post'>
+        <div className='post' ref={ref}>
             <div className="post_body">
                 <h2 className="post_title">{idx}. {post.title}</h2>
                 {post.description}
@@ -13,6 +13,6 @@ const PostItem = ({post, idx}) => {
 
         </div>
     );
-};
+});
 
 export default PostItem;
