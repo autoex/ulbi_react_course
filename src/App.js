@@ -12,13 +12,8 @@ const App = () => {
         {id: 4, title: 'Title', description: 'Description'},
     ]);
 
-    const [post, setPost] = useState({title: '', description: ''});
-    const addPost = (e) => {
-        e.preventDefault();
-        if (post.title.trim().length === 0 || post.description.trim().length === 0) return;
-
-        setPosts([...posts, {...post, id: Date.now() }]);
-        setPost({...post, title: '', description:''})
+    const createPost =(post)=> {
+        setPosts([...posts, post])
 
     };
     const removePost =(idx)=> {
@@ -28,7 +23,7 @@ const App = () => {
     };
     return (
         <div className='app'>
-            <Form post={post} setPost={setPost} addPost={addPost}/>
+            <Form createPost={createPost} />
             <Posts posts={posts} removePost={removePost}/>
 
 
