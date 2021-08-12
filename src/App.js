@@ -16,11 +16,7 @@ const App = () => {
     const addPost = (e) => {
         e.preventDefault();
         if (post.title.trim().length === 0 || post.description.trim().length === 0) return;
-        const newPost = {
-            id: Date.now(),
-            title: post.title,
-            description: post.body
-        };
+
         setPosts([...posts, {...post, id: Date.now() }]);
         setPost({...post, title: '', description:''})
 
