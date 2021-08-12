@@ -12,17 +12,17 @@ const App = () => {
         {id: 4, title: 'Title', description: 'Description'},
     ]);
 
-    const [post, setPost] = useState({title: '', body: ''});
+    const [post, setPost] = useState({title: '', description: ''});
     const addPost = (e) => {
         e.preventDefault();
-        if (post.title.trim().length === 0 || post.body.trim().length === 0) return;
+        if (post.title.trim().length === 0 || post.description.trim().length === 0) return;
         const newPost = {
             id: Date.now(),
             title: post.title,
             description: post.body
         };
-        setPosts([...posts, newPost]);
-        setPost({...post, title: '', body:''})
+        setPosts([...posts, {...post, id: Date.now() }]);
+        setPost({...post, title: '', description:''})
 
     };
     const removePost =(idx)=> {

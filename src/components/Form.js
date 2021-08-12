@@ -10,7 +10,7 @@ const Form = ({post, setPost, addPost}) => {
                 <Input  type="text" placeholder={'Title'} value={post.title} onChange={e=>setPost({...post, title:e.target.value})}/>
             </div>
             <div>
-                <Input type="text" placeholder={'Body'} value={post.body} onChange={e=>setPost({...post, body:e.target.value})}/>
+                <Input type="text" placeholder={'Body'} value={post.description} onChange={e=>setPost({...post, description:e.target.value})}/>
             </div>
             <div>
                 <Button >Add</Button>
