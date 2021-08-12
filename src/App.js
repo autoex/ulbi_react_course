@@ -26,10 +26,15 @@ const App = () => {
         setTitle('');
         setBody('');
     };
+    const removePost =(idx)=> {
+        setPosts(posts.filter(post=>  post.id !== idx ));
+
+
+    }
     return (
         <div className='app'>
             <Form title={title} body={body} setBody={setBody} setTitle={setTitle} addPost={addPost}/>
-            <Posts posts={posts}/>
+            <Posts posts={posts} removePost={removePost}/>
 
 
         </div>
