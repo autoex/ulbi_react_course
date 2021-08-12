@@ -13,11 +13,9 @@ const App = () => {
     ]);
 
     const [post, setPost] = useState({title: '', body: ''});
-    const [title, setTitle] = useState('');
-    const [body, setBody] = useState('');
     const addPost = (e) => {
         e.preventDefault();
-        if (post.title.trim().length === 0 || post.body.trim().length === 0) return
+        if (post.title.trim().length === 0 || post.body.trim().length === 0) return;
         const newPost = {
             id: Date.now(),
             title: post.title,
@@ -31,7 +29,7 @@ const App = () => {
         setPosts(posts.filter(post=>  post.id !== idx ));
 
 
-    }
+    };
     return (
         <div className='app'>
             <Form post={post} setPost={setPost} addPost={addPost}/>
