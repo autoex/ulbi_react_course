@@ -22,3 +22,6 @@
 
 .post_btn {}
 .post_title{}
+.posts h1 {
+    padding-bottom: 15px;
+}
