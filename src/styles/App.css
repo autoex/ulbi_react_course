@@ -31,3 +31,17 @@
 .postFilter div {
     padding-bottom: 15px;
 }
+.post__item-enter {
+    opacity: 0;
+}
+.post__item-enter-active {
+    opacity: 1;
+    transition: opacity 500ms ease-in;
+}
+.post__item-exit {
+    opacity: 1;
+}
+.post__item-exit-active {
+    opacity: 0;
+    transition: opacity 500ms ease-in;
+}
