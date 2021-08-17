@@ -36,7 +36,9 @@ const App = () => {
     }, [filter.query, sortedPosts])
 
     const createPost = (post) => {
-        setPosts([...posts, post])
+        setPosts([...posts, post]);
+        setModalActive(false)
+
 
     };
     const removePost = (idx) => {
