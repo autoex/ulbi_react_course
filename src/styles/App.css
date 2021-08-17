@@ -25,3 +25,9 @@
 .posts h1 {
     padding-bottom: 15px;
 }
+.postFilter {
+    margin-bottom: 15px;
+}
+.postFilter div {
+    padding-bottom: 15px;
+}

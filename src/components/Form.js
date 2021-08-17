@@ -3,7 +3,7 @@ import '../styles/Form.css'
 import Button from "../UI/button/Button";
 import Input from "../UI/input/Input";
 
-const Form = ({createPost}) => {
+const Form = ({createPost, setModalActive}) => {
     const [post, setPost] = useState({title: '', description: ''});
     const addPost = (e) => {
         e.preventDefault();
@@ -30,7 +30,11 @@ const Form = ({createPost}) => {
                        onChange={e => setPost({...post, description: e.target.value})}/>
             </div>
             <div>
-                <Button>Add</Button>
+                {post.title.trim().length === 0 || post.description.trim().length === 0 ?
+                    <Button onClick={()=>setModalActive(false)} disabled>Add</Button>
+                :
+                    <Button onClick={()=>setModalActive(false)} >Add</Button>}
+
             </div>
         </form>
     );

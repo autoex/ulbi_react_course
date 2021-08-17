@@ -5,6 +5,8 @@ import Form from "./components/Form";
 import Select from "./UI/select/Select";
 import Input from "./UI/input/Input";
 import PostFilter from "./components/PostFilter";
+import Modal from "./UI/modal/Modal";
+import Button from "./UI/button/Button";
 
 
 const App = () => {
@@ -14,49 +16,45 @@ const App = () => {
         {id: 3, title: 'asds', description: 'aaaa'},
 
     ]);
+    const [modalActive, setModalActive] = useState(false)
     const [filter, setFilter] = useState({sort: '', query: ''})
 
 
-    const getSortedPosts =()=> {
-        if(filter.sort) {
-            return [...posts].sort((a, b)=> a[filter.sort].localeCompare(b[filter.sort]))
-        }
-        return posts
-    };
-
-    const sortedPosts = useMemo(()=> {
+    const sortedPosts = useMemo(() => {
         console.log('RUN')
-        if(filter.sort) {
-            return [...posts].sort((a, b)=> a[filter.sort].localeCompare(b[filter.sort]))
+        if (filter.sort) {
+            return [...posts].sort((a, b) => a[filter.sort].localeCompare(b[filter.sort]))
         }
         return posts
 
     }, [filter.sort, posts]);
 
 
-    const sortedAndSearchedPosts = useMemo(()=> {
-        return sortedPosts.filter((post)=>post.title.toLowerCase().includes(filter.query))
+    const sortedAndSearchedPosts = useMemo(() => {
+        return sortedPosts.filter((post) => post.title.toLowerCase().includes(filter.query))
 
     }, [filter.query, sortedPosts])
 
-    const createPost =(post)=> {
+    const createPost = (post) => {
         setPosts([...posts, post])
 
     };
-    const removePost =(idx)=> {
-        setPosts(posts.filter(post=>  post.id !== idx ));
+    const removePost = (idx) => {
+        setPosts(posts.filter(post => post.id !== idx));
 
 
     };
 
     return (
         <div className='app'>
-            <Form createPost={createPost} />
-            <hr style={{marginBottom: '15px'}}/>
+            <Button onClick={() => setModalActive(true)}>Add</Button>
+            <Modal modalActive={modalActive} setModalActive={setModalActive}>
+                <Form createPost={createPost} setModalActive={setModalActive}/>
+            </Modal>
+
             <PostFilter filter={filter} setFilter={setFilter}/>
 
-            {sortedAndSearchedPosts.length === 0 ? 'No posts' : <Posts posts={sortedAndSearchedPosts} removePost={removePost}/>}
-
+            <Posts posts={sortedAndSearchedPosts} removePost={removePost}/>
 
 
         </div>

@@ -3,6 +3,9 @@ import PostItem from "./PostItem";
 import FlipMove from "react-flip-move";
 
 const Posts = ({posts, removePost}) => {
+    if(!posts.length) {
+        return  <h1>No posts</h1>
+    }
     return (
         <div className='posts'>
             <h1>Posts:</h1>

@@ -4,18 +4,22 @@ import Select from "../UI/select/Select";
 
 const PostFilter = ({filter, setFilter}) => {
     return (
-        <div>
-            <Input
-                placeholder='Search..'
-                value={filter.query}
-                onChange={(e) => setFilter({ ...filter, query:e.target.value})}
-            />
-            <Select
-                value={filter.sort}
-                onChange={selectedSort=> setFilter({...filter, sort: selectedSort})}
-                defaultValue='Select'
-                options={[{value: 'title', name: 'By title'}, {value: 'description', name: 'By description'}]}
-            />
+        <div className='postFilter'>
+            <div>
+                <Input
+                    placeholder='Search..'
+                    value={filter.query}
+                    onChange={(e) => setFilter({...filter, query: e.target.value})}
+                />
+            </div>
+            <div>
+                <Select
+                    value={filter.sort}
+                    onChange={selectedSort => setFilter({...filter, sort: selectedSort})}
+                    defaultValue='Select'
+                    options={[{value: 'title', name: 'By title'}, {value: 'description', name: 'By description'}]}
+                />
+            </div>
         </div>
     );
 };
