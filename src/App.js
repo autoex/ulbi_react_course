@@ -4,6 +4,7 @@ import Posts from "./components/Posts";
 import Form from "./components/Form";
 import Select from "./UI/select/Select";
 import Input from "./UI/input/Input";
+import PostFilter from "./components/PostFilter";
 
 
 const App = () => {
@@ -13,31 +14,30 @@ const App = () => {
         {id: 3, title: 'asds', description: 'aaaa'},
 
     ]);
-    const [selectedSort, setSelectedSort] = useState('');
-    const [searchQuery, setSearchQuery] = useState('');
+    const [filter, setFilter] = useState({sort: '', query: ''})
 
 
     const getSortedPosts =()=> {
-        if(selectedSort) {
-            return [...posts].sort((a, b)=> a[selectedSort].localeCompare(b[selectedSort]))
+        if(filter.sort) {
+            return [...posts].sort((a, b)=> a[filter.sort].localeCompare(b[filter.sort]))
         }
         return posts
     };
 
     const sortedPosts = useMemo(()=> {
         console.log('RUN')
-        if(selectedSort) {
-            return [...posts].sort((a, b)=> a[selectedSort].localeCompare(b[selectedSort]))
+        if(filter.sort) {
+            return [...posts].sort((a, b)=> a[filter.sort].localeCompare(b[filter.sort]))
         }
         return posts
 
-    }, [selectedSort, posts]);
+    }, [filter.sort, posts]);
 
 
     const sortedAndSearchedPosts = useMemo(()=> {
-        return sortedPosts.filter((post)=>post.title.toLowerCase().includes(searchQuery))
+        return sortedPosts.filter((post)=>post.title.toLowerCase().includes(filter.query))
 
-    }, [searchQuery, sortedPosts])
+    }, [filter.query, sortedPosts])
 
     const createPost =(post)=> {
         setPosts([...posts, post])
@@ -48,24 +48,12 @@ const App = () => {
 
 
     };
-    const sortPosts =(sort)=> {
-        setSelectedSort(sort);
-    };
+
     return (
         <div className='app'>
             <Form createPost={createPost} />
             <hr style={{marginBottom: '15px'}}/>
-            <Input
-                placeholder='Search..'
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-            />
-            <Select
-                value={selectedSort}
-                sortPosts={sortPosts}
-                defaultValue='Select'
-                options={[{value: 'title', name: 'By title'}, {value: 'description', name: 'By description'}]}
-            />
+            <PostFilter filter={filter} setFilter={setFilter}/>
 
             {sortedAndSearchedPosts.length === 0 ? 'No posts' : <Posts posts={sortedAndSearchedPosts} removePost={removePost}/>}
 
