@@ -7,6 +7,7 @@ import Input from "./UI/input/Input";
 import PostFilter from "./components/PostFilter";
 import Modal from "./UI/modal/Modal";
 import Button from "./UI/button/Button";
+import {usePosts} from "./hooks/usePosts";
 
 
 const App = () => {
@@ -16,36 +17,20 @@ const App = () => {
         {id: 3, title: 'asds', description: 'aaaa'},
 
     ]);
-    const [modalActive, setModalActive] = useState(false)
-    const [filter, setFilter] = useState({sort: '', query: ''})
+
+    const [modalActive, setModalActive] = useState(false);
+    const [filter, setFilter] = useState({sort: '', query: ''});
+    const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query)
 
 
-    const sortedPosts = useMemo(() => {
-        console.log('RUN')
-        if (filter.sort) {
-            return [...posts].sort((a, b) => a[filter.sort].localeCompare(b[filter.sort]))
-        }
-        return posts
 
-    }, [filter.sort, posts]);
-
-
-    const sortedAndSearchedPosts = useMemo(() => {
-        return sortedPosts.filter((post) => post.title.toLowerCase().includes(filter.query))
-
-    }, [filter.query, sortedPosts])
 
     const createPost = (post) => {
         setPosts([...posts, post]);
         setModalActive(false)
-
-
     };
-    const removePost = (idx) => {
-        setPosts(posts.filter(post => post.id !== idx));
 
-
-    };
+    const removePost = (idx) => setPosts(posts.filter(post => post.id !== idx));
 
     return (
         <div className='app'>

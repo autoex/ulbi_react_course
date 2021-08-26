@@ -31,6 +31,8 @@
 .postFilter div {
     padding-bottom: 15px;
 }
+
+/*react transition group styles*/
 .post__item-enter {
     opacity: 0;
 }
@@ -45,3 +47,4 @@
     opacity: 0;
     transition: opacity 500ms ease-in;
 }
+/*react transition group styles*/
