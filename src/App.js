@@ -21,9 +21,7 @@ const App = () => {
 
     };
 
-   /* useEffect(()=>{setPosts(
-        {id: 1, title: 'Title', body: 'Description'},
-    )}, [])*/
+    useEffect(()=> {fetchPosts()}, [])
 
     const [modalActive, setModalActive] = useState(false);
     const [filter, setFilter] = useState({sort: '', query: ''});
@@ -41,7 +39,6 @@ const App = () => {
 
     return (
         <div className='app'>
-            <button onClick={fetchPosts}>cl</button>
             <Button onClick={() => setModalActive(true)}>Add</Button>
             <Modal modalActive={modalActive} setModalActive={setModalActive}>
                 <Form createPost={createPost} setModalActive={setModalActive}/>
