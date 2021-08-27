@@ -1,4 +1,4 @@
-import React, {useState, useMemo} from 'react';
+import React, {useState, useMemo, useEffect} from 'react';
 import './styles/App.css'
 import Posts from "./components/Posts";
 import Form from "./components/Form";
@@ -8,15 +8,22 @@ import PostFilter from "./components/PostFilter";
 import Modal from "./UI/modal/Modal";
 import Button from "./UI/button/Button";
 import {usePosts} from "./hooks/usePosts";
+import axios from "axios";
 
 
 const App = () => {
-    const [posts, setPosts] = useState([
-        {id: 1, title: 'Title', description: 'Description'},
-        {id: 2, title: '111', description: 'dfdf'},
-        {id: 3, title: 'asds', description: 'aaaa'},
+    const [posts, setPosts] = useState([]);
 
-    ]);
+    const fetchPosts =async ()=> {
+
+        const resp = await axios('https://jsonplaceholder.typicode.com/posts');
+        setPosts(resp.data);
+
+    };
+
+   /* useEffect(()=>{setPosts(
+        {id: 1, title: 'Title', body: 'Description'},
+    )}, [])*/
 
     const [modalActive, setModalActive] = useState(false);
     const [filter, setFilter] = useState({sort: '', query: ''});
@@ -34,6 +41,7 @@ const App = () => {
 
     return (
         <div className='app'>
+            <button onClick={fetchPosts}>cl</button>
             <Button onClick={() => setModalActive(true)}>Add</Button>
             <Modal modalActive={modalActive} setModalActive={setModalActive}>
                 <Form createPost={createPost} setModalActive={setModalActive}/>
