@@ -11,26 +11,24 @@ import {usePosts} from "./hooks/usePosts";
 import axios from "axios";
 import PostsService from "./API/PostsService";
 import Loader from "./UI/loader/Loader";
+import {useFetching} from "./hooks/useFetching";
 
 
 const App = () => {
     const [posts, setPosts] = useState([]);
 
-    const fetchPosts =async ()=> {
-        setIsFetching(true);
-        const resp = await PostsService.getPosts();
-        setPosts(resp);
-        setIsFetching(false);
 
-
-    };
 
     useEffect(()=> {fetchPosts()}, [])
 
     const [modalActive, setModalActive] = useState(false);
-    const [isFetching, setIsFetching] = useState(false)
     const [filter, setFilter] = useState({sort: '', query: ''});
-    const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query)
+    const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query);
+    const [isFetching, postsError, fetchPosts] = useFetching(async ()=> {
+        const resp = await PostsService.getPosts();
+        setPosts(resp);
+
+    })
 
 
 
@@ -52,7 +50,7 @@ const App = () => {
 
             <PostFilter filter={filter} setFilter={setFilter}/>
 
-           { isFetching ? <h1>Loading...</h1> : <Posts posts={sortedAndSearchedPosts} removePost={removePost}/>}
+           { isFetching ? <h1>Loading...</h1> : <Posts posts={sortedAndSearchedPosts} removePost={removePost} postsError={postsError}/>}
 
 
         </div>

@@ -5,8 +5,9 @@ import {
     TransitionGroup,
 } from 'react-transition-group';
 
-const Posts = ({posts, removePost}) => {
+const Posts = ({posts, removePost, postsError}) => {
     if(!posts.length) {
+        if (postsError) return  <h1>{postsError}</h1>
         return  <h1>No posts</h1>
     }
     return (
