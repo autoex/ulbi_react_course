@@ -9,6 +9,7 @@ import Modal from "./UI/modal/Modal";
 import Button from "./UI/button/Button";
 import {usePosts} from "./hooks/usePosts";
 import axios from "axios";
+import PostsService from "./API/PostsService";
 
 
 const App = () => {
@@ -16,8 +17,8 @@ const App = () => {
 
     const fetchPosts =async ()=> {
 
-        const resp = await axios('https://jsonplaceholder.typicode.com/posts');
-        setPosts(resp.data);
+        const resp = await PostsService.getPosts();
+        setPosts(resp);
 
     };
 
