@@ -52,7 +52,7 @@ const App = () => {
 
             <PostFilter filter={filter} setFilter={setFilter}/>
 
-            <Posts posts={sortedAndSearchedPosts} removePost={removePost}/>
+           { isFetching ? <h1>Loading...</h1> : <Posts posts={sortedAndSearchedPosts} removePost={removePost}/>}
 
 
         </div>
