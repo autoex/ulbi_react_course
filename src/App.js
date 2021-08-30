@@ -10,21 +10,25 @@ import Button from "./UI/button/Button";
 import {usePosts} from "./hooks/usePosts";
 import axios from "axios";
 import PostsService from "./API/PostsService";
+import Loader from "./UI/loader/Loader";
 
 
 const App = () => {
     const [posts, setPosts] = useState([]);
 
     const fetchPosts =async ()=> {
-
+        setIsFetching(true);
         const resp = await PostsService.getPosts();
         setPosts(resp);
+        setIsFetching(false);
+
 
     };
 
     useEffect(()=> {fetchPosts()}, [])
 
     const [modalActive, setModalActive] = useState(false);
+    const [isFetching, setIsFetching] = useState(false)
     const [filter, setFilter] = useState({sort: '', query: ''});
     const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query)
 
@@ -40,6 +44,7 @@ const App = () => {
 
     return (
         <div className='app'>
+           {isFetching && <Loader/>}
             <Button onClick={() => setModalActive(true)}>Add</Button>
             <Modal modalActive={modalActive} setModalActive={setModalActive}>
                 <Form createPost={createPost} setModalActive={setModalActive}/>
