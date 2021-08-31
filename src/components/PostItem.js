@@ -6,7 +6,7 @@ const PostItem = ({post, idx, removePost}) => {
     return (
         <div className='post' >
             <div className="post_body">
-                <h2 className="post_title">{idx}. {post.title}</h2>
+                <h2 className="post_title">{post.id}. {post.title}</h2>
                 {post.description}
             </div>
             <div className="post_btn"><Button onClick={()=>removePost(post.id)}>Delete</Button></div>

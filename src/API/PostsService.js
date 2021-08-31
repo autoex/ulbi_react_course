@@ -1,9 +1,12 @@
 import axios from "axios";
 
 class PostsService {
-    static async getPosts() {
-        const resp = await axios('https://jsonplaceholder.typicode.com/posts');
-        return (resp.data);
+    static async getPosts(postsPerPage = 10, currentPage =4) {
+        const resp = await axios(`https://jsonplaceholder.typicode.com/posts`, { params: {
+            _limit: postsPerPage,
+            _page: currentPage
+        }});
+        return (resp);
 
     }
 

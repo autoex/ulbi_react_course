@@ -1,0 +1,11 @@
+.paginator {
+    padding: 15px 0;
+}
+.paginator span {
+    padding: 0 5px;
+    cursor: pointer;
+}
+.current__page {
+    font-weight: bold;
+    cursor: text!important;
+}

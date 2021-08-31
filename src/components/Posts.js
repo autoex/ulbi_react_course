@@ -4,8 +4,9 @@ import {
     CSSTransition,
     TransitionGroup,
 } from 'react-transition-group';
+import Paginator from "../UI/paginator/Paginator";
 
-const Posts = ({posts, removePost, postsError}) => {
+const Posts = ({posts, removePost, postsError, totalPages, currentPage, setCurrentPage}) => {
     if(!posts.length) {
         if (postsError) return  <h1>{postsError}</h1>
         return  <h1>No posts</h1>
@@ -22,6 +23,11 @@ const Posts = ({posts, removePost, postsError}) => {
                     ><PostItem removePost={removePost} post={post} idx={idx + 1}/>
                     </CSSTransition>)}
             </TransitionGroup>
+            <Paginator
+                       totalPages={totalPages}
+                       setCurrentPage={setCurrentPage}
+                       currentPage={currentPage}
+            />
         </div>
     );
 };
