@@ -3,6 +3,7 @@ import {useHistory, useParams} from 'react-router-dom'
 import Button from "../UI/button/Button";
 import PostsService from "../API/PostsService";
 import {useFetching} from "../hooks/useFetching";
+import Loader from "../UI/loader/Loader";
 
 
 const PostDetails = () => {
@@ -25,7 +26,8 @@ const PostDetails = () => {
     return (
         <div>
             <Button onClick={() => history.goBack()}>Back</Button>
-            <div>{post}</div>
+            {isFetching ? <Loader/> : <div>{post}</div>}
+
         </div>
     );
 };
