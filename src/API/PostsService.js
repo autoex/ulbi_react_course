@@ -10,6 +10,13 @@ class PostsService {
 
     }
 
+
+    static async getPost(id) {
+        const resp = await axios(`https://jsonplaceholder.typicode.com/posts/${id}` );
+        return (resp.data);
+
+    }
+
 }
 
 
