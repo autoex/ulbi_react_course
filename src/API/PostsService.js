@@ -17,6 +17,12 @@ class PostsService {
 
     }
 
+    static async getComments(id) {
+        const resp = await axios(`https://jsonplaceholder.typicode.com/posts/${id}/comments` );
+        return (resp.data);
+
+    }
+
 }
 
 

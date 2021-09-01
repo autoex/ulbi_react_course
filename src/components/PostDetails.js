@@ -11,6 +11,8 @@ const PostDetails = () => {
     const params = useParams();
     const userId = params.id;
     const [post, setPost] = useState('');
+    const [comments, setComments] = useState([]);
+
 
 
     const [isFetching, postsError, fetchPost] = useFetching(async () => {
@@ -20,13 +22,32 @@ const PostDetails = () => {
 
 
     });
+
+    const [isFetchingComments, commentsError, fetchComments] = useFetching(async () => {
+
+        const resp = await PostsService.getComments(userId);
+        setComments(resp);
+
+
+
+    });
     useEffect(()=> {
-        fetchPost()
+        fetchPost();
+        fetchComments()
     }, [])
     return (
         <div>
             <Button onClick={() => history.goBack()}>Back</Button>
-            {isFetching ? <Loader/> : <div>{post}</div>}
+            {isFetchingComments ? <Loader/> :
+                <div>{post}</div>
+            }
+
+            {isFetchingComments ? <Loader/> :
+
+               <div><h2>Comments:</h2>
+                   { comments.map(comment=><div className='card' key={comment.id}>{comment.body}</div>)}
+               </div>
+            }
 
         </div>
     );
