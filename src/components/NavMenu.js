@@ -11,11 +11,13 @@ const NavMenu = () => {
                     <NavLink className="nav-link" to={'/posts'}>Posts</NavLink>
                 </li>
                 <li className="nav-item">
-                    <NavLink className="nav-link" to={'/about'}>About</NavLink>
+                    <NavLink className="nav-link    " to={'/about'}>About</NavLink>
                 </li>
             </ul>}
             {isAuth &&
-            <NavLink onClick={() => setIsAuth(false)} className="nav-link" to={'/about'}>Logout</NavLink>
+            <NavLink onClick={() => {
+                localStorage.removeItem('auth')
+                setIsAuth(false)}} className="nav-link" to={'/about'}>Logout</NavLink>
             }</div>
     );
 };
