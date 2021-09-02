@@ -49,3 +49,7 @@
     transition: opacity 500ms ease-in;
 }
 /*react transition group styles*/
+.navBar {
+    display: flex;
+    justify-content: space-between;
+}
