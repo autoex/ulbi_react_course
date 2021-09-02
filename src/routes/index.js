@@ -7,8 +7,7 @@ export const privateRoutes  = [
     {path: '/posts', component: PostsPage, exact: true},
     {path: '/posts/:id', component: PostDetails, exact: false},
     {path: '/', component: PostsPage, exact: true},
-    {path: '/about', component: About, exact: true},
-    {path: '/login', component: Login, exact: true}
+    {path: '/about', component: About, exact: true}
 ];
 
 export const publicRoutes  = [

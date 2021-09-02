@@ -1,20 +1,22 @@
-import React, {useState} from 'react';
+import React, {useContext} from 'react';
 import NoMatch from "../pages/noMatchPage/NoMatch";
 import {Redirect, Route, Switch} from "react-router-dom";
 import {privateRoutes, publicRoutes} from "../routes";
+import {AuthContext} from "../context";
 
 const AppRouter = () => {
-    const [authorized, setAuthorized] = useState(false);
+    const {isAuth} = useContext(AuthContext);
     return (
-        authorized ?
+        isAuth ?
             <Switch>
-                {(privateRoutes.map(route => <Route exact path={route.path} component={route.component}/>)
+                {(privateRoutes.map(route => <Route key={route.path} exact={route.exact} path={route.path} component={route.component}/>)
                 )}
+                <Redirect to='/posts'/>
                 <Route component={NoMatch}/>
             </Switch>
             :
             <Switch>
-                {publicRoutes.map(route => <Route exact path={route.path} component={route.component}/>)}}
+                {publicRoutes.map(route => <Route key={route.path} exact={route.exact} path={route.path} component={route.component}/>)}}
                 <Redirect to='login'/>
             </Switch>)
 };
